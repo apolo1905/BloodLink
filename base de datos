@@ -1,0 +1,59 @@
+CREATE TABLE IF NOT EXISTS donantes (
+    id INT AUTO_INCREMENT PRIMARY KEY,  
+    nombre VARCHAR(100) NOT NULL,  
+    cedula VARCHAR(20) NOT NULL UNIQUE,  
+    edad TINYINT UNSIGNED NOT NULL CHECK (edad BETWEEN 18 AND 100),  
+    sexo ENUM('M', 'F') NOT NULL,  
+    estado_civil ENUM('S', 'C', 'D', 'V') NULL,  
+    tiene_tatuaje BOOLEAN NOT NULL,  
+    consume_drogas BOOLEAN NOT NULL,  
+    bebe_alcohol BOOLEAN NOT NULL, 
+    fuma BOOLEAN NOT NULL, 
+    preferencia_sexual VARCHAR(20) NULL, 
+    lugar_trabajo VARCHAR(100) NULL,  
+    ultima_donacion DATE NOT NULL,  
+    ultima_prueba_vih DATE NOT NULL,  
+    ha_estado_resfriado BOOLEAN NOT NULL,  
+    ha_recibido_tratamiento_dental BOOLEAN NULL,  
+    ha_utilizado_aspirina BOOLEAN NOT NULL,  
+    se_siente_bien_salud BOOLEAN NOT NULL,  
+    ha_tomado_medicamento_hoy BOOLEAN NOT NULL,  
+    ha_sido_vacunado BOOLEAN NOT NULL, 
+    tipo_sangre ENUM('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-') NOT NULL  
+);
+
+CREATE TABLE IF NOT EXISTS solicitudes (
+    id INT AUTO_INCREMENT PRIMARY KEY,  
+    nombre VARCHAR(100) NOT NULL,  
+    edad TINYINT UNSIGNED NOT NULL CHECK (edad > 0), 
+    genero ENUM('M', 'F') NOT NULL,  
+    tipo_sangre ENUM('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-') NOT NULL,  
+    cantidad_requerida_ml INT UNSIGNED NOT NULL CHECK (cantidad_requerida_ml > 0),  
+    hospital VARCHAR(100) NOT NULL,  
+    departamento_estado VARCHAR(50) NOT NULL,  
+    ciudad VARCHAR(50) NOT NULL,  
+    direccion_hospital VARCHAR(150) NOT NULL,  
+    fecha_requerida DATE NOT NULL,  
+    hora_requerida TIME NULL,  
+    contacto VARCHAR(20) NOT NULL,  
+    nombre_contacto VARCHAR(100) NOT NULL,  
+    relacion_paciente VARCHAR(50) NOT NULL,  
+    motivo_solicitud TEXT NOT NULL,  
+    tipo_urgencia ENUM('Alta', 'Media', 'Baja') NOT NULL,  
+    comentarios_adicionales TEXT NULL,  
+    estado_solicitud ENUM('Pendiente', 'En proceso', 'Completado', 'Cancelado') NOT NULL,  
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  
+    registrado_por VARCHAR(100) NOT NULL
+    );
+
+
+    SELECT * FROM donaciones.donante;
+INSERT INTO Donante (Nombre, Cedula, Edad, Sexo, Estado_civil, Tiene_tatuaje, Consume_drogas, Bebe_alcohol, Fuma, Preferencia_sexual, Donde_trabaja, Ultima_vez_dono_sangre, Ultima_prueba_VIH, Ha_estado_resfriado, Ha_recibido_tratamiento_dental, Ha_utilizado_aspirina, Se_siente_bien_de_salud, Ha_tomado_medicamento_hoy, Ha_sido_vacunado)
+VALUES ('Juan Perez', 8998877, 30, 'M', TRUE, TRUE, FALSE, TRUE, FALSE, 'Hetero', 'Banco', '2024-01-15', '2024-07-10', TRUE, FALSE, TRUE, TRUE, FALSE, TRUE);
+
+SELECT * FROM donaciones.solicitud;
+INSERT INTO Solicitud (Nombre, Edad, Genero, Tipo_sangre, Cantidad_requerida_ml, Hospital, Departamento_estado, Ciudad, Direccion_hospital, Fecha_requerida, Hora_requerida, Contacto, Nombre_contacto, Relacion_con_paciente, Motivo_solicitud, Tipo_urgencia, Comentarios_adicionales, Estado_solicitud, Fecha_registro, Registrado_por)
+VALUES ('Ana Gonzalez', 45, 'F', 'O+', 500, 'Hospital santo tomas', 'Estado A', 'Ciuda de panama', 'punta pacifica', '2024-08-20', '14:00', 67439263, 'Luis Gonzalez', 'Hermano', 'Cirugía de emergencia', 'Alta', 'Paciente necesita transfusión urgente', 'Pendiente', '2024-08-08', 'Dr. Martinez');
+
+SELECT * FROM Donante;
+SELECT * FROM Solicitud;
